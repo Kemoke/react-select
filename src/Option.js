@@ -8,7 +8,7 @@ class Option extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleMouseDown = this.handleMouseDown.bind(this);
+		this.handleMouseUp = this.handleMouseUp.bind(this);
 		this.handleMouseEnter = this.handleMouseEnter.bind(this);
 		this.handleMouseMove = this.handleMouseMove.bind(this);
 		this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -17,7 +17,7 @@ class Option extends React.Component {
 		this.onFocus = this.onFocus.bind(this);
 	}
 
-	handleMouseDown (event) {
+	handleMouseUp (event) {
 		event.preventDefault();
 		event.stopPropagation();
 		this.props.onSelect(this.props.option, event);
@@ -36,7 +36,7 @@ class Option extends React.Component {
 		// we don't want to fire the click event (because the user only wants to scroll)
 		if(this.dragging) return;
 
-		this.handleMouseDown(event);
+		this.handleMouseUp(event);
 	}
 
 	handleTouchMove () {
@@ -70,7 +70,7 @@ class Option extends React.Component {
 				style={option.style}
 				role="option"
 				aria-label={option.label}
-				onMouseDown={this.handleMouseDown}
+				onMouseUp={this.handleMouseUp}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseMove={this.handleMouseMove}
 				onTouchStart={this.handleTouchStart}
