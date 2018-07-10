@@ -2663,11 +2663,11 @@ describe('Select', () => {
 			expect(
 				instance,
 				'with event',
-				'mouseDown',
+				'mouseUp',
 				'on',
 				<div className="Select-option">Two</div>,
 				'with event',
-				'mouseDown',
+				'mouseUp',
 				'on',
 				<div className="Select-option">One</div>,
 				'to contain',
@@ -2688,14 +2688,14 @@ describe('Select', () => {
 			var items = ReactDOM.findDOMNode(instance).querySelectorAll(
 				'.Select-option'
 			);
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called once');
 			expect(onChange, 'was called with', [{ value: 'two', label: 'Two' }]);
 
 			// Second item
 
 			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
-			TestUtils.Simulate.mouseDown(items[0]);
+			TestUtils.Simulate.mouseUp(items[0]);
 			expect(onChange, 'was called twice');
 		});
 
@@ -2708,7 +2708,7 @@ describe('Select', () => {
 
 			// Click the option "Two" to select it
 			expect(items[1], 'to have text', 'Two');
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called times', 1);
 
 			// Now get the list again
@@ -2719,7 +2719,7 @@ describe('Select', () => {
 			expect(items, 'to have length', 3);
 
 			// Click first item, 'One'
-			TestUtils.Simulate.mouseDown(items[0]);
+			TestUtils.Simulate.mouseUp(items[0]);
 
 			expect(onChange, 'was called times', 2);
 			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
@@ -2728,7 +2728,7 @@ describe('Select', () => {
 			expect(items, 'to have length', 2);
 
 			// Click second item, 'Four'
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called times', 3);
 
 			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
@@ -2929,7 +2929,7 @@ describe('Select', () => {
 
 			// Click the option "Two" to select it
 			expect(items[1], 'to have text', 'Two');
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called times', 1);
 
 			// Now get the list again
@@ -2941,7 +2941,7 @@ describe('Select', () => {
 			expect(items, 'to have length', 4);
 
 			// Click first item, 'One'
-			TestUtils.Simulate.mouseDown(items[0]);
+			TestUtils.Simulate.mouseUp(items[0]);
 			expect(onChange, 'was called times', 2);
 
 			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
@@ -2952,7 +2952,7 @@ describe('Select', () => {
 			expect(items, 'to have length', 4);
 
 			// Click last item, 'Four'
-			TestUtils.Simulate.mouseDown(items[3]);
+			TestUtils.Simulate.mouseUp(items[3]);
 			expect(onChange, 'was called times', 3);
 
 			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
@@ -2984,7 +2984,7 @@ describe('Select', () => {
 
 			// Click the option "Two" to select it
 			expect(items[1], 'to have text', 'Two');
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(items[1].classList.contains('is-focused'), 'to be true');
 		});
 
@@ -2996,11 +2996,11 @@ describe('Select', () => {
 			);
 
 			// Click the option "Two" to select it
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called times', 1);
 
 			// Click the option "Two" again to deselect it
-			TestUtils.Simulate.mouseDown(items[1]);
+			TestUtils.Simulate.mouseUp(items[1]);
 			expect(onChange, 'was called times', 2);
 
 			expect(onChange.args, 'to equal', [

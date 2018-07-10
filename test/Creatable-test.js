@@ -134,7 +134,7 @@ describe('Creatable', () => {
 			options
 		});
 		typeSearchText('foo');
-		TestUtils.Simulate.mouseDown(creatableNode.querySelector('.Select-create-option-placeholder'));
+		TestUtils.Simulate.mouseUp(creatableNode.querySelector('.Select-create-option-placeholder'));
 		expect(options, 'to have length', 1);
 		expect(options[0].label, 'to equal', 'foo');
 		expect(selectedOption, 'to be', options[0]);

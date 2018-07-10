@@ -56,7 +56,7 @@ describe('Option component', () => {
 	it('renders the given option', () => {
 		expect(node.textContent, 'to equal', 'Test Label');
 		expect(onSelect, 'was not called');
-		TestUtils.Simulate.mouseDown(node);
+		TestUtils.Simulate.mouseUp(node);
 		expect(onSelect, 'was called');
 		expect(onFocus, 'was not called');
 		TestUtils.Simulate.mouseEnter(node);
