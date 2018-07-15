@@ -5,9 +5,11 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 var arrowRenderer = function arrowRenderer(_ref) {
+	var onClick = _ref.onClick;
+
 	return React.createElement('span', {
 		className: 'Select-arrow',
-		onClick: onMouseDown
+		onClick: onClick
 	});
 };
 
@@ -413,12 +415,9 @@ var Option = function (_React$Component) {
 
 		var _this = possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).call(this, props));
 
-		_this.handleMouseUp = _this.handleMouseUp.bind(_this);
+		_this.handleClick = _this.handleClick.bind(_this);
 		_this.handleMouseEnter = _this.handleMouseEnter.bind(_this);
 		_this.handleMouseMove = _this.handleMouseMove.bind(_this);
-		_this.handleTouchStart = _this.handleTouchStart.bind(_this);
-		_this.handleTouchEnd = _this.handleTouchEnd.bind(_this);
-		_this.handleTouchMove = _this.handleTouchMove.bind(_this);
 		_this.onFocus = _this.onFocus.bind(_this);
 		return _this;
 	}
@@ -468,6 +467,7 @@ var Option = function (_React$Component) {
 					role: 'option',
 					'aria-label': option.label,
 					onClick: this.handleClick,
+					onMouseDown: blockEvent,
 					onMouseEnter: this.handleMouseEnter,
 					onMouseMove: this.handleMouseMove,
 					id: instancePrefix + '-option-' + optionIndex,
@@ -512,9 +512,6 @@ var Value = function (_React$Component) {
 	createClass(Value, [{
 		key: 'handleMouseDown',
 		value: function handleMouseDown(event) {
-			if (event.type === 'mousedown' && event.button !== 0) {
-				return;
-			}
 			if (this.props.onClick) {
 				event.stopPropagation();
 				this.props.onClick(this.props.value, event);
@@ -574,7 +571,7 @@ var Value = function (_React$Component) {
 			var className = 'Select-value-label';
 			return this.props.onClick || this.props.value.href ? React.createElement(
 				'a',
-				{ className: className, href: this.props.value.href, target: this.props.value.target, onMouseDown: this.handleMouseDown, onTouchEnd: this.handleMouseDown },
+				{ className: className, href: this.props.value.href, target: this.props.value.target, onClick: this.handleMouseDown, onTouchEnd: this.handleMouseDown },
 				this.props.children
 			) : React.createElement(
 				'span',

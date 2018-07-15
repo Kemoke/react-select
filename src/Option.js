@@ -8,52 +8,51 @@ class Option extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleMouseUp = this.handleMouseUp.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 		this.handleMouseEnter = this.handleMouseEnter.bind(this);
 		this.handleMouseMove = this.handleMouseMove.bind(this);
-		this.handleTouchStart = this.handleTouchStart.bind(this);
-		this.handleTouchEnd = this.handleTouchEnd.bind(this);
-		this.handleTouchMove = this.handleTouchMove.bind(this);
 		this.onFocus = this.onFocus.bind(this);
 	}
 
-	handleClick (event) {
+	handleClick(event) {
 		this.props.onSelect(this.props.option, event);
 	}
 
-	handleMouseEnter (event) {
+	handleMouseEnter(event) {
 		this.onFocus(event);
 	}
 
-	handleMouseMove (event) {
+	handleMouseMove(event) {
 		this.onFocus(event);
 	}
-	onFocus (event) {
+
+	onFocus(event) {
 		if (!this.props.isFocused) {
 			this.props.onFocus(this.props.option, event);
 		}
 	}
 
-	render () {
+	render() {
 		const { option, instancePrefix, optionIndex } = this.props;
 		const className = classNames(this.props.className, option.className);
 
 		return option.disabled ? (
 			<div className={className}
-				onMouseDown={blockEvent}
-				onClick={blockEvent}>
+				 onMouseDown={blockEvent}
+				 onClick={blockEvent}>
 				{this.props.children}
 			</div>
 		) : (
 			<div className={className}
-				style={option.style}
-				role="option"
-				aria-label={option.label}
-				onClick={this.handleClick}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseMove={this.handleMouseMove}
-				id={`${instancePrefix}-option-${optionIndex}`}
-				title={option.title}>
+				 style={option.style}
+				 role="option"
+				 aria-label={option.label}
+				 onClick={this.handleClick}
+				 onMouseDown={blockEvent}
+				 onMouseEnter={this.handleMouseEnter}
+				 onMouseMove={this.handleMouseMove}
+				 id={`${instancePrefix}-option-${optionIndex}`}
+				 title={option.title}>
 				{this.props.children}
 			</div>
 		);
