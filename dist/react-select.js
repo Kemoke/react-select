@@ -10,11 +10,9 @@ PropTypes = PropTypes && PropTypes.hasOwnProperty('default') ? PropTypes['defaul
 var React__default = 'default' in React ? React['default'] : React;
 
 var arrowRenderer = function arrowRenderer(_ref) {
-	var onMouseDown = _ref.onMouseDown;
-
 	return React__default.createElement('span', {
 		className: 'Select-arrow',
-		onMouseDown: onMouseDown
+		onClick: onMouseDown
 	});
 };
 
@@ -431,10 +429,8 @@ var Option = function (_React$Component) {
 	}
 
 	createClass(Option, [{
-		key: 'handleMouseUp',
-		value: function handleMouseUp(event) {
-			event.preventDefault();
-			event.stopPropagation();
+		key: 'handleClick',
+		value: function handleClick(event) {
 			this.props.onSelect(this.props.option, event);
 		}
 	}, {
@@ -446,27 +442,6 @@ var Option = function (_React$Component) {
 		key: 'handleMouseMove',
 		value: function handleMouseMove(event) {
 			this.onFocus(event);
-		}
-	}, {
-		key: 'handleTouchEnd',
-		value: function handleTouchEnd(event) {
-			// Check if the view is being dragged, In this case
-			// we don't want to fire the click event (because the user only wants to scroll)
-			if (this.dragging) return;
-
-			this.handleMouseUp(event);
-		}
-	}, {
-		key: 'handleTouchMove',
-		value: function handleTouchMove() {
-			// Set a flag that the view is being dragged
-			this.dragging = true;
-		}
-	}, {
-		key: 'handleTouchStart',
-		value: function handleTouchStart() {
-			// Set a flag that the view is not being dragged
-			this.dragging = false;
 		}
 	}, {
 		key: 'onFocus',
@@ -497,12 +472,9 @@ var Option = function (_React$Component) {
 					style: option.style,
 					role: 'option',
 					'aria-label': option.label,
-					onMouseUp: this.handleMouseUp,
+					onClick: this.handleClick,
 					onMouseEnter: this.handleMouseEnter,
 					onMouseMove: this.handleMouseMove,
-					onTouchStart: this.handleTouchStart,
-					onTouchMove: this.handleTouchMove,
-					onTouchEnd: this.handleTouchEnd,
 					id: instancePrefix + '-option-' + optionIndex,
 					title: option.title },
 				this.props.children
@@ -889,7 +861,7 @@ var Select$1 = function (_React$Component) {
 		value: function handleMouseDown(event) {
 			// if the event was triggered by a mousedown and not the primary
 			// button, or if the component is disabled, ignore it.
-			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
+			if (this.props.disabled) {
 				return;
 			}
 
@@ -909,7 +881,6 @@ var Select$1 = function (_React$Component) {
 			}
 
 			// prevent default event handlers
-			event.preventDefault();
 
 			// for the non-searchable select, toggle the menu
 			if (!this.props.searchable) {
@@ -961,14 +932,12 @@ var Select$1 = function (_React$Component) {
 		value: function handleMouseDownOnArrow(event) {
 			// if the event was triggered by a mousedown and not the primary
 			// button, or if the component is disabled, ignore it.
-			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
+			if (this.props.disabled) {
 				return;
 			}
 
 			if (this.state.isOpen) {
 				// prevent default event handlers
-				event.stopPropagation();
-				event.preventDefault();
 				// close the menu
 				this.closeMenu();
 			} else {
@@ -983,12 +952,9 @@ var Select$1 = function (_React$Component) {
 		value: function handleMouseDownOnMenu(event) {
 			// if the event was triggered by a mousedown and not the primary
 			// button, or if the component is disabled, ignore it.
-			if (this.props.disabled || event.type === 'mouseup' && event.button !== 0) {
+			if (this.props.disabled) {
 				return;
 			}
-
-			event.stopPropagation();
-			event.preventDefault();
 
 			this._openAfterFocus = true;
 			this.focus();
@@ -1644,7 +1610,7 @@ var Select$1 = function (_React$Component) {
 				{
 					'aria-label': ariaLabel,
 					className: 'Select-clear-zone',
-					onMouseDown: this.clearValue,
+					onClick: this.clearValue,
 					onTouchEnd: this.handleTouchEndClearValue,
 					onTouchMove: this.handleTouchMove,
 					onTouchStart: this.handleTouchStart,
@@ -1658,9 +1624,9 @@ var Select$1 = function (_React$Component) {
 		value: function renderArrow() {
 			if (!this.props.arrowRenderer) return;
 
-			var onMouseDown = this.handleMouseDownOnArrow;
+			var onClick = this.handleMouseDownOnArrow;
 			var isOpen = this.state.isOpen;
-			var arrow = this.props.arrowRenderer({ onMouseDown: onMouseDown, isOpen: isOpen });
+			var arrow = this.props.arrowRenderer({ onClick: onClick, isOpen: isOpen });
 
 			if (!arrow) {
 				return null;
@@ -1670,7 +1636,7 @@ var Select$1 = function (_React$Component) {
 				'span',
 				{
 					className: 'Select-arrow-zone',
-					onMouseDown: onMouseDown
+					onClick: onClick
 				},
 				arrow
 			);
@@ -1815,7 +1781,7 @@ var Select$1 = function (_React$Component) {
 					{
 						className: 'Select-menu',
 						id: this._instancePrefix + '-list',
-						onMouseUp: this.handleMouseDownOnMenu,
+						onClick: this.handleMouseDownOnMenu,
 						onScroll: this.handleMenuScroll,
 						ref: function ref(_ref4) {
 							return _this8.menu = _ref4;
@@ -1883,7 +1849,7 @@ var Select$1 = function (_React$Component) {
 						},
 						className: 'Select-control',
 						onKeyDown: this.handleKeyDown,
-						onMouseDown: this.handleMouseDown,
+						onClick: this.handleMouseDown,
 						onTouchEnd: this.handleTouchEnd,
 						onTouchMove: this.handleTouchMove,
 						onTouchStart: this.handleTouchStart,

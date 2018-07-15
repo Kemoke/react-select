@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const arrowRenderer = ({ onMouseDown }) => {
+const arrowRenderer = ({ onClick }) => {
 	return (
 		<span
 			className="Select-arrow"
-			onMouseDown={onMouseDown}
+			onClick={onMouseDown}
 		/>
 	);
 };

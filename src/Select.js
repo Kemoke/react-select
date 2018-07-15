@@ -935,7 +935,7 @@ class Select extends React.Component {
 			<span
 				aria-label={ariaLabel}
 				className="Select-clear-zone"
-				onMouseDown={this.clearValue}
+				onClick={this.clearValue}
 				onTouchEnd={this.handleTouchEndClearValue}
 				onTouchMove={this.handleTouchMove}
 				onTouchStart={this.handleTouchStart}
@@ -949,9 +949,9 @@ class Select extends React.Component {
 	renderArrow () {
 		if (!this.props.arrowRenderer) return;
 
-		const onMouseDown = this.handleMouseDownOnArrow;
+		const onClick = this.handleMouseDownOnArrow;
 		const isOpen = this.state.isOpen;
-		const arrow = this.props.arrowRenderer({ onMouseDown, isOpen });
+		const arrow = this.props.arrowRenderer({ onClick, isOpen });
 
 		if (!arrow) {
 			return null;
@@ -960,7 +960,7 @@ class Select extends React.Component {
 		return (
 			<span
 				className="Select-arrow-zone"
-				onClick={onMouseDown}
+				onClick={onClick}
 			>
 				{arrow}
 			</span>
