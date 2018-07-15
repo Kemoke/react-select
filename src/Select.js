@@ -260,7 +260,7 @@ class Select extends React.Component {
 	handleMouseDown (event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
-		if (this.props.disabled || (event.type === 'mousedown' && event.button !== 0)) {
+		if (this.props.disabled) {
 			return;
 		}
 
@@ -280,7 +280,6 @@ class Select extends React.Component {
 		}
 
 		// prevent default event handlers
-		event.preventDefault();
 
 		// for the non-searchable select, toggle the menu
 		if (!this.props.searchable) {
@@ -331,14 +330,12 @@ class Select extends React.Component {
 	handleMouseDownOnArrow (event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
-		if (this.props.disabled || (event.type === 'mousedown' && event.button !== 0)) {
+		if (this.props.disabled) {
 			return;
 		}
 
 		if (this.state.isOpen) {
 			// prevent default event handlers
-			event.stopPropagation();
-			event.preventDefault();
 			// close the menu
 			this.closeMenu();
 		} else {
@@ -352,12 +349,9 @@ class Select extends React.Component {
 	handleMouseDownOnMenu (event) {
 		// if the event was triggered by a mousedown and not the primary
 		// button, or if the component is disabled, ignore it.
-		if (this.props.disabled || (event.type === 'mouseup' && event.button !== 0)) {
+		if (this.props.disabled) {
 			return;
 		}
-
-		event.stopPropagation();
-		event.preventDefault();
 
 		this._openAfterFocus = true;
 		this.focus();
@@ -966,7 +960,7 @@ class Select extends React.Component {
 		return (
 			<span
 				className="Select-arrow-zone"
-				onMouseDown={onMouseDown}
+				onClick={onMouseDown}
 			>
 				{arrow}
 			</span>
@@ -1102,7 +1096,7 @@ class Select extends React.Component {
 				<div
 					className="Select-menu"
 					id={`${this._instancePrefix}-list`}
-					onMouseUp={this.handleMouseDownOnMenu}
+					onClick={this.handleMouseDownOnMenu}
 					onScroll={this.handleMenuScroll}
 					ref={ref => this.menu = ref}
 					role="listbox"
@@ -1164,7 +1158,7 @@ class Select extends React.Component {
 				<div ref={ref => this.control = ref}
 					className="Select-control"
 					onKeyDown={this.handleKeyDown}
-					onMouseDown={this.handleMouseDown}
+					onClick={this.handleMouseDown}
 					onTouchEnd={this.handleTouchEnd}
 					onTouchMove={this.handleTouchMove}
 					onTouchStart={this.handleTouchStart}

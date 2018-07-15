@@ -17,9 +17,7 @@ class Option extends React.Component {
 		this.onFocus = this.onFocus.bind(this);
 	}
 
-	handleMouseUp (event) {
-		event.preventDefault();
-		event.stopPropagation();
+	handleClick (event) {
 		this.props.onSelect(this.props.option, event);
 	}
 
@@ -30,25 +28,6 @@ class Option extends React.Component {
 	handleMouseMove (event) {
 		this.onFocus(event);
 	}
-
-	handleTouchEnd(event){
-		// Check if the view is being dragged, In this case
-		// we don't want to fire the click event (because the user only wants to scroll)
-		if(this.dragging) return;
-
-		this.handleMouseUp(event);
-	}
-
-	handleTouchMove () {
-		// Set a flag that the view is being dragged
-		this.dragging = true;
-	}
-
-	handleTouchStart () {
-		// Set a flag that the view is not being dragged
-		this.dragging = false;
-	}
-
 	onFocus (event) {
 		if (!this.props.isFocused) {
 			this.props.onFocus(this.props.option, event);
@@ -70,12 +49,9 @@ class Option extends React.Component {
 				style={option.style}
 				role="option"
 				aria-label={option.label}
-				onMouseUp={this.handleMouseUp}
+				onClick={this.handleClick}
 				onMouseEnter={this.handleMouseEnter}
 				onMouseMove={this.handleMouseMove}
-				onTouchStart={this.handleTouchStart}
-				onTouchMove={this.handleTouchMove}
-				onTouchEnd={this.handleTouchEnd}
 				id={`${instancePrefix}-option-${optionIndex}`}
 				title={option.title}>
 				{this.props.children}
