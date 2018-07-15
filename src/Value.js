@@ -15,9 +15,6 @@ class Value extends React.Component {
 	}
 
 	handleMouseDown (event) {
-		if (event.type === 'mousedown' && event.button !== 0) {
-			return;
-		}
 		if (this.props.onClick) {
 			event.stopPropagation();
 			this.props.onClick(this.props.value, event);
@@ -70,7 +67,7 @@ class Value extends React.Component {
 	renderLabel () {
 		let className = 'Select-value-label';
 		return this.props.onClick || this.props.value.href ? (
-			<a className={className} href={this.props.value.href} target={this.props.value.target} onMouseDown={this.handleMouseDown} onTouchEnd={this.handleMouseDown}>
+			<a className={className} href={this.props.value.href} target={this.props.value.target} onClick={this.handleMouseDown} onTouchEnd={this.handleMouseDown}>
 				{this.props.children}
 			</a>
 		) : (

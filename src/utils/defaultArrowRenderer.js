@@ -5,7 +5,7 @@ const arrowRenderer = ({ onClick }) => {
 	return (
 		<span
 			className="Select-arrow"
-			onClick={onMouseDown}
+			onClick={onClick}
 		/>
 	);
 };
